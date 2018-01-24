@@ -18,21 +18,28 @@ marked.setOptions({
 });
 
 /*
- * Serve JSON to our AngularJS client
+ * 文章列表数据
  */
-exports.name = function (req, res) {
-	// res.json({
-	// 	name: 'Bob'
-	// });
-
-	fs.readFile('markdown/README.md', function(err, data) {
-		var html = marked(data.toString());
-		// res.send(html);
-		res.json({
-			id: '1',
-			postTitle: '适用移动端的样式重置',
-			date: 'November 24, 2017',
-			postContent: html
+exports.postlist = function (req, res) {
+	var postDatas = require('../data/post.json');
+	fs.readdir("markdown/", function(err, files) {
+		files.forEach(function(file, index) {
+			fs.readFile('markdown/'+file, function(err, data) {
+				postDatas[index].postContent = marked(data.toString());
+			});
 		});
+		res.send(postDatas);
+	});
+};
+
+/*
+ * 文章数据
+ */
+exports.post = function (req, res) {
+	var id = req.query.postId;
+	var postDatas = require('../data/post.json');
+	fs.readFile('markdown/'+id+'.md', function(err, data) {
+		postDatas[id-1].postContent = marked(data.toString());
+		res.json(postDatas[id-1]);
 	});
 };

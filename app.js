@@ -47,7 +47,8 @@ app.use('/users', users);
 app.use(cors());
 
 // JSON API
-app.get('/api/name', api.name);
+app.get('/api/post', api.post);
+app.get('/api/postlist', api.postlist);
 
 // app.all('*', function(req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
