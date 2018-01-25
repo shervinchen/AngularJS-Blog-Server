@@ -21,11 +21,19 @@ marked.setOptions({
  * 文章列表数据
  */
 exports.postlist = function (req, res) {
-	var postDatas = require('../data/post.json');
+	// 每页显示文章数
+	var pagePostCount = 5;
+	// 取得当前页数
+	var page = req.query.page;
+	var postDatas = require('../data/post.json').reverse();
 	fs.readdir("markdown/", function(err, files) {
+		var postPos = (page - 1) * pagePostCount;
+		postDatas = postDatas.slice(postPos, postPos + pagePostCount);
+		files = files.reverse().slice(postPos, postPos + pagePostCount);
 		files.forEach(function(file, index) {
 			fs.readFile('markdown/'+file, function(err, data) {
 				postDatas[index].postContent = marked(data.toString());
+				// console.log(postDatas[index]);
 			});
 		});
 		res.send(postDatas);
