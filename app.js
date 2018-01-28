@@ -47,10 +47,10 @@ app.use('/users', users);
 app.use(cors());
 
 // JSON API
-app.get('/api/post', api.post);
-app.get('/api/postlist', api.postlist);
-app.get('/api/postcount', api.postcount);
-app.get('/api/postrecent', api.postrecent);
+app.get('/post', api.post);
+app.get('/postlist', api.postlist);
+app.get('/postcount', api.postcount);
+app.get('/postrecent', api.postrecent);
 
 // app.all('*', function(req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
