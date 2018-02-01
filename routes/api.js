@@ -21,7 +21,7 @@ marked.setOptions({
 		try {
 		  return hljs.highlightAuto(code).value;
 		} catch (err) {}
-		return ''; 
+		return '';
 	}
 });
 
@@ -140,11 +140,20 @@ exports.postrecent = function(req, res) {
  */
 exports.postcategory = function(req, res) {
 	// 获取文章数据
-	var postDatas = copyArr(require('../data/post.json'));
-	var postCategories = [];
+	const postDatas = copyArr(require('../data/post.json'));
+	var arr = [];
 	postDatas.forEach(function(postData, index) {
-		postCategories = postCategories.concat(postData.postCategories);
+		arr = arr.concat(postData.postCategories);
 	});
-	console.log(postCategories);
-	res.send(postCategories);
+  const map = arr.reduce((m, x) => m.set(x, (m.get(x) || 0) + 1), new Map());
+  // 去重数组
+  const newArr = Array.from(map.keys());
+  const result = [];
+  newArr.forEach(function(elem, index) {
+    const data = {};
+    data.postCategoryName = elem;
+    data.postCategoryCount = map.get(elem);
+    result.push(data);
+  });
+	res.send(result);
 };
