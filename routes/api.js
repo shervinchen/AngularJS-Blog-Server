@@ -134,3 +134,17 @@ exports.postrecent = function(req, res) {
 	postDatas = copyArr(postDatas.slice(0, postRecentCount+1));
 	res.send(postDatas);
 };
+
+/*
+ * 文章分类
+ */
+exports.postcategory = function(req, res) {
+	// 获取文章数据
+	var postDatas = copyArr(require('../data/post.json'));
+	var postCategories = [];
+	postDatas.forEach(function(postData, index) {
+		postCategories = postCategories.concat(postData.postCategories);
+	});
+	console.log(postCategories);
+	res.send(postCategories);
+};
