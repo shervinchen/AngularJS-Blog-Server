@@ -52,6 +52,7 @@ app.get('/postlist', api.postlist);
 app.get('/postcount', api.postcount);
 app.get('/postrecent', api.postrecent);
 app.get('/postcategory', api.postcategory);
+app.get('/posttag', api.posttag);
 
 // app.all('*', function(req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");

@@ -3,7 +3,16 @@
 		"postId": "01",
 		"postTitle": "千里之行，始于脚下",
 		"postDate": "August 06, 2016",
-		"postTags": ["生活", "技术"],
+		"postTags": [
+			{
+				"text": "生活",
+				"weight": "0",
+				"link": 
+			},
+			{
+				"技术"
+			}
+		],
 		"postCategories": ["生活"]
 	},
 	{

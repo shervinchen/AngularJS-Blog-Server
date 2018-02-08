@@ -157,3 +157,26 @@ exports.postcategory = function(req, res) {
   });
 	res.send(result);
 };
+
+/*
+ * 文章标签
+ */
+exports.posttag = function(req, res) {
+	// 获取文章数据
+	const postDatas = copyArr(require('../data/post.json'));
+	var arr = [];
+	postDatas.forEach(function(postData, index) {
+		arr = arr.concat(postData.postTags);
+	});
+  const map = arr.reduce((m, x) => m.set(x, (m.get(x) || 0) + 1), new Map());
+  // 去重数组
+  const newArr = Array.from(map.keys());
+  const result = [];
+  newArr.forEach(function(elem, index) {
+    const data = {};
+    data.postTagName = elem;
+    data.postCategoryCount = map.get(elem);
+    result.push(data);
+  });
+	res.send(result);
+};
