@@ -3,70 +3,200 @@
 		"postId": "01",
 		"postTitle": "千里之行，始于脚下",
 		"postDate": "August 06, 2016",
-		"aa": [
+		"postTags": [
 			{
 				"text": "生活",
-				"weight": "0",
-				"link": ""
+				"weight": ""
+			},
+			{
+				"text": "技术",
+				"weight": ""
 			}
 		],
-		"postTags": ["生活","技术"],
 		"postCategories": ["生活"]
 	},
 	{
 		"postId": "02",
 		"postTitle": "五子棋AI（一）：五子棋及五子棋AI概述",
 		"postDate": "August 27, 2016",
-		"postTags": ["五子棋", "AI", "算法"],
+		"postTags": [
+			{
+				"text": "五子棋",
+				"weight": ""
+			},
+			{
+				"text": "AI",
+				"weight": ""
+			},
+			{
+				"text": "算法",
+				"weight": ""
+			}
+		],
 		"postCategories": ["算法", "AI"]
 	},
 	{
 		"postId": "03",
 		"postTitle": "五子棋AI（二）：绘制界面，添加点击事件，棋局胜负判断",
 		"postDate": "September 13, 2016",
-		"postTags": ["五子棋", "AI", "算法", "Canvas"],
+		"postTags": [
+			{
+				"text": "五子棋",
+				"weight": ""
+			},
+			{
+				"text": "AI",
+				"weight": ""
+			},
+			{
+				"text": "算法",
+				"weight": ""
+			},
+			{
+				"text": "Canvas",
+				"weight": ""
+			}
+		],
 		"postCategories": ["算法", "AI", "Canvas"]
 	},
 	{
 		"postId": "04",
 		"postTitle": "CSS和JS相关知识点总结（内容导航）",
 		"postDate": "March 26, 2017",
-		"postTags": ["JavaScript", "CSS", "总结"],
+		"postTags": [
+			{
+				"text": "JavaScript",
+				"weight": ""
+			},
+			{
+				"text": "CSS",
+				"weight": ""
+			},
+			{
+				"text": "总结",
+				"weight": ""
+			}
+		],
 		"postCategories": ["CSS", "JavaScript"]
 	},
 	{
 		"postId": "05",
 		"postTitle": "打砖块——js面向对象初识",
 		"postDate": "August 30, 2017",
-		"postTags": ["JavaScript", "面向对象", "算法", "Canvas"],
+		"postTags": [
+			{
+				"text": "JavaScript",
+				"weight": ""
+			},
+			{
+				"text": "面向对象",
+				"weight": ""
+			},
+			{
+				"text": "算法",
+				"weight": ""
+			},
+			{
+				"text": "Canvas",
+				"weight": ""
+			}
+		],
 		"postCategories": ["JavaScript", "Canvas", "算法"]
 	},
 	{
 		"postId": "06",
 		"postTitle": "围住神经猫——广度优先搜索的妙用",
 		"postDate": "October 03, 2017",
-		"postTags": ["JavaScript", "Canvas", "算法", "广度优先搜索", "深度优先搜索", "围住神经猫"],
+		"postTags": [
+			{
+				"text": "JavaScript",
+				"weight": ""
+			},
+			{
+				"text": "Canvas",
+				"weight": ""
+			},
+			{
+				"text": "算法",
+				"weight": ""
+			},
+			{
+				"text": "广度优先搜索",
+				"weight": ""
+			},
+			{
+				"text": "深度优先搜索",
+				"weight": ""
+			},
+			{
+				"text": "围住神经猫",
+				"weight": ""
+			}
+		],
 		"postCategories": ["JavaScript", "Canvas", "算法"]
 	},
 	{
 		"postId": "07",
 		"postTitle": "vps折腾记（一）——简介、选购、环境搭建",
 		"postDate": "October 22, 2017",
-		"postTags": ["vps", "服务器", "Linux"],
+		"postTags": [
+			{
+				"text": "vps",
+				"weight": ""
+			},
+			{
+				"text": "服务器",
+				"weight": ""
+			},
+			{
+				"text": "Linux",
+				"weight": ""
+			}
+		],
 		"postCategories": ["vps", "Linux"]
 	},
 	{
 		"postId": "08",
 		"postTitle": "啃书笔记（一）——《JavaScript-DOM编程艺术》",
 		"postDate": "October 29, 2017",
-		"postTags": ["JavaScript", "DOM", "啃书", "笔记"],
+		"postTags": [
+			{
+				"text": "JavaScript",
+				"weight": ""
+			},
+			{
+				"text": "DOM",
+				"weight": ""
+			},
+			{
+				"text": "啃书",
+				"weight": ""
+			},
+			{
+				"text": "笔记",
+				"weight": ""
+			}
+		],
 		"postCategories": ["JavaScript"]
 	},
 	{
 		"postId": "09",
 		"postTitle": "啃书笔记（二）——《JavaScript高级程序设计》",
 		"postDate": "November 06, 2017",
-		"postTags": ["JavaScript", "啃书", "笔记"],
+		"postTags": [
+			{
+				"text": "JavaScript",
+				"weight": ""
+			},
+			{
+				"text": "啃书",
+				"weight": ""
+			},
+			{
+				"text": "笔记",
+				"weight": ""
+			}
+		],
 		"postCategories": ["JavaScript"]
 	},
 	{

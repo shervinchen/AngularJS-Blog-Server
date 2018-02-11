@@ -37,38 +37,51 @@ function copyArr(arr) {
  * 文章列表数据
  */
 exports.postlist = function(req, res) {
-	// 每页显示文章数
-	var perPageCount = 5;
-	// 取得当前页数
-	var page = req.query.page;
 	// 文件夹路径
 	var fileDirectory = "markdown/";
 	// 获取文章数据
 	var postDatas = copyArr(require('../data/post.json'));
-	// 求出当前页的起始文章位置
-	var postPos = (page - 1) * perPageCount;
-	// 将文章数据倒序
-	postDatas.reverse();
-	// 截取要显示的文章数据
-	postDatas = copyArr(postDatas.slice(postPos, postPos + perPageCount));
-	// 判断文件夹路径是否存在
-	if (fs.existsSync(fileDirectory)) {
-		fs.readdir(fileDirectory, function(err, files) {
-			if (err) { console.log(err); return; }
-			files.reverse();
-			files = copyArr(files.slice(postPos, postPos + perPageCount));
-			files.forEach(function(filename, index) {
-				fs.readFile(fileDirectory + filename, function(err, data) {
-					if (err) throw err;
-					var splitData = data.toString().split('<!--more-->')[0];
-					postDatas[index].postContent = marked(splitData);
-					if (index === files.length - 1) {
-						res.send(postDatas);
-					}
+	// 获取文章总数
+    var totalPost = postDatas.length;
+	// 每页显示文章数
+	var perPageCount = 5;
+	// 取得当前页数
+	var page = req.query.page;
+	// 求出总页数
+    var totalPage;
+    if (totalPost % perPageCount === 0) {
+      totalPage = totalPost / perPageCount;
+    } else {
+      totalPage = (totalPost - totalPost % perPageCount) / perPageCount + 1;
+    }
+	if (page > 0 && page < totalPage + 1) {
+		// 求出当前页的起始文章位置
+		var postPos = (page - 1) * perPageCount;
+		// 将文章数据倒序
+		postDatas.reverse();
+		// 截取要显示的文章数据
+		postDatas = copyArr(postDatas.slice(postPos, postPos + perPageCount));
+		// 判断文件夹路径是否存在
+		if (fs.existsSync(fileDirectory)) {
+			fs.readdir(fileDirectory, function(err, files) {
+				if (err) { console.log(err); return; }
+				files.reverse();
+				files = copyArr(files.slice(postPos, postPos + perPageCount));
+				files.forEach(function(filename, index) {
+					fs.readFile(fileDirectory + filename, function(err, data) {
+						if (err) throw err;
+						var splitData = data.toString().split('<!--more-->')[0];
+						postDatas[index].postContent = marked(splitData);
+						if (index === files.length - 1) {
+							res.send(postDatas);
+						}
+					});
 				});
 			});
-		});
-	} else { console.log(fileDirectory + "  Not Found!"); }
+		} else { console.log(fileDirectory + "  Not Found!"); }
+	} else {
+		res.status(404).send('Sorry cant find that!');
+	}
 };
 
 /*
@@ -87,16 +100,33 @@ exports.postcount = function(req, res) {
  * 文章数据
  */
 exports.post = function(req, res) {
+	// 文件夹路径
+	var fileDirectory = "markdown/";
 	var id = req.query.postId;
 	var postDatas = require('../data/post.json');
-	fs.readFile('markdown/'+id+'.md', function(err, data) {
-    	if (err) throw err;
-		marked(data.toString(), function(err, content) {
-			if (err) throw err;
-			postDatas[id-1].postContent = content;
-			res.json(postDatas[id-1]);
+	var isPostExist = false;
+	// 判断文件夹路径是否存在
+	if (fs.existsSync(fileDirectory)) {
+		fs.readdir(fileDirectory, function(err, files) {
+			if (err) { console.log(err); return; }
+			files.forEach(function(filename, index) {
+				if (filename === id+'.md') {
+					isPostExist = true;
+					fs.readFile(fileDirectory+id+'.md', function(err, data) {
+				    	if (err) throw err;
+						marked(data.toString(), function(err, content) {
+							if (err) throw err;
+							postDatas[id-1].postContent = content;
+							res.send(postDatas[id-1]);
+						});
+					});
+				}
+			});
+			if (!isPostExist) {
+				res.status(404).send('Sorry cant find that!');
+			}
 		});
-	});
+	} else { console.log(fileDirectory + "  Not Found!"); }
 	// var data = '';
 	// // 创建可读流
 	// var readerStream = fs.createReadStream('markdown/'+id+'.md');
