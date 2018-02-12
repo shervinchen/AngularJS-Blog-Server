@@ -49,6 +49,7 @@ app.use(cors());
 // JSON API
 app.get('/post', api.post);
 app.get('/postlist', api.postlist);
+app.get('/taglist', api.taglist);
 app.get('/postcount', api.postcount);
 app.get('/postrecent', api.postrecent);
 app.get('/postcategory', api.postcategory);
