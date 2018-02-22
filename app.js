@@ -50,6 +50,7 @@ app.use(cors());
 app.get('/post', api.post);
 app.get('/postlist', api.postlist);
 app.get('/taglist', api.taglist);
+app.get('/categorylist', api.categorylist);
 app.get('/postcount', api.postcount);
 app.get('/postrecent', api.postrecent);
 app.get('/postcategory', api.postcategory);

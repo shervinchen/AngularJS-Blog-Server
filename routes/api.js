@@ -166,6 +166,83 @@ exports.taglist = function(req, res) {
 };
 
 /*
+ * 某个分类下的文章列表数据
+ */
+exports.categorylist = function(req, res) {
+	// 文件夹路径
+	var fileDirectory = "markdown/";
+	// 获取文章数据
+	var postDatas = copyArr(require('../data/post.json'));
+	// 取得当前分类
+	var category = req.query.category;
+	// 每页显示文章数
+	var perPageCount = 5;
+	// 取得当前页数
+	var page = req.query.page;
+	if (page === '') {
+		page = 1;
+	}
+	var result = [];
+	// 将文章数据倒序
+	postDatas.reverse();
+	// 判断文件夹路径是否存在
+	if (fs.existsSync(fileDirectory)) {
+		fs.readdir(fileDirectory, function(err, files) {
+			if (err) { console.log(err); return; }
+			files.reverse();
+			// files = copyArr(files.slice(postPos, postPos + perPageCount));
+			files.forEach(function(filename, index) {
+				fs.readFile(fileDirectory + filename, function(err, data) {
+					if (err) throw err;
+					var splitData = data.toString().split('<!--more-->')[0];
+					postDatas[index].postContent = marked(splitData);
+					// if (index === files.length - 1) {
+					// 	res.send(postDatas);
+					// }
+				});
+			});
+			// 判断当前分类是否存在
+			var isCategoryExist = false;
+			postDatas.forEach(function(postData, index) {
+				for (var i = 0; i < postData.postCategories.length; i++) {
+					if (postData.postCategories[i] === category) {
+						isCategoryExist = true;
+						result.push(postData);
+						break;
+					}
+				}
+			});
+			// 如果分类不存在 返回404
+			if (!isCategoryExist) {
+				res.status(404).send('Sorry cant find that!');
+			} else {
+				// 获取文章总数
+			    var totalPost = result.length;
+				// 求出总页数
+			    var totalPage;
+			    if (totalPost % perPageCount === 0) {
+			      totalPage = totalPost / perPageCount;
+			    } else {
+			      totalPage = (totalPost - totalPost % perPageCount) / perPageCount + 1;
+			    }
+				// 如果页数不是当前范围直接返回404
+				if (page < 1 || page > totalPage) {
+					res.status(404).send('Sorry cant find that!');
+				} else {
+					// 求出当前页的起始文章位置
+					var postPos = (page - 1) * perPageCount;
+					var data = {};
+					data.count = totalPost;
+					data.data = result.slice(postPos, postPos + perPageCount);
+					// 截取要显示的文章数据并返回
+					res.send(data);
+				}
+			}
+		});
+	} else { console.log(fileDirectory + "  Not Found!"); }
+};
+
+/*
  * 文章数量
  */
 exports.postcount = function(req, res) {
@@ -293,7 +370,7 @@ exports.posttag = function(req, res) {
 		data.link = 'https://rekodsc.com/tag/'+elem+'/';
 		// data.link = '#!/tag/'+elem+'/';
 		data.count = map.get(elem);
-		data.weight = Math.floor(Math.random() * 10);
+		data.weight = Math.floor(Math.random() * 9 + 16);
 		result.push(data);
 	});
 	res.send(result);
