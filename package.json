@@ -16,5 +16,8 @@
     "marked": "^0.3.12",
     "morgan": "~1.9.0",
     "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "csdutils": "^1.0.2"
   }
 }

@@ -1,6 +1,9 @@
 var fs = require('fs');
 var marked = require('marked');
 var hljs = require('highlight.js');
+// var csdutils = require('csdutils');
+
+// console.log(csdutils.checkUtils.isNumber(10));
 
 marked.setOptions({
     renderer: new marked.Renderer(),
