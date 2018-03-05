@@ -18,6 +18,7 @@
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
-    "csdutils": "^1.0.2"
+    "csdutils": "^1.0.6",
+    "filesize.js": "^1.0.2"
   }
 }

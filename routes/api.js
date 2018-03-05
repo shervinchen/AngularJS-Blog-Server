@@ -1,9 +1,11 @@
 var fs = require('fs');
 var marked = require('marked');
 var hljs = require('highlight.js');
-// var csdutils = require('csdutils');
+var csdutils = require('csdutils');
+// var filesize = require('filesize.js');
 
 // console.log(csdutils.checkUtils.isNumber(10));
+// console.log(filesize(123456789));
 
 marked.setOptions({
     renderer: new marked.Renderer(),
